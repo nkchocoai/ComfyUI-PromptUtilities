@@ -1,4 +1,6 @@
+import folder_paths
 
+from .preset import PresetManager
 
 class PromptUtilitiesFormatString:
     @classmethod
@@ -28,7 +30,7 @@ class PromptUtilitiesFormatString:
         for i in range(1, len(kwargs) + 1):
             result = result.replace(f'[{i}]',kwargs[f"arg{i}"]) 
         return (result,)
-    
+
 
 class PromptUtilitiesJoinStringList:
     @classmethod
@@ -50,7 +52,27 @@ class PromptUtilitiesJoinStringList:
     CATEGORY = "PromptUtilities"
 
     def join(self, separator, **kwargs):
+        PresetManager.load_presets()
         print(kwargs)
         print(kwargs.values())
         result = separator.join(kwargs.values())
         return (result,)
+
+
+class PromptUtilitiesLoadPreset:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": { 
+                "preset": (list(PresetManager.get_presets().keys()), ),
+            }
+        }
+            
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "load_preset"
+
+    CATEGORY = "PromptUtilities"
+
+    def load_preset(self, preset):
+        prompt = PresetManager.get_prompt(preset)
+        return (prompt,)
