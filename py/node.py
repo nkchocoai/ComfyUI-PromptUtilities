@@ -2,7 +2,39 @@ import folder_paths
 
 from .preset import PresetManager
 
-class PromptUtilitiesFormatString:
+class BaseNode:
+    CATEGORY = "PromptUtilities"
+
+
+class PromptUtilitiesConstStringBase(BaseNode):
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "get_string"
+
+    def get_string(self, string):
+        return (string,)
+
+
+class PromptUtilitiesConstString(PromptUtilitiesConstStringBase):
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "string": ("STRING", {"default": "", "multiline": False})
+            }
+        }
+
+
+class PromptUtilitiesConstStringMultiLine(PromptUtilitiesConstStringBase):
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "string": ("STRING", {"default": "", "multiline": True})
+            }
+        }
+
+
+class PromptUtilitiesFormatString(BaseNode):
     @classmethod
     def INPUT_TYPES(s):
         input_types = {
@@ -22,8 +54,6 @@ class PromptUtilitiesFormatString:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "format"
 
-    CATEGORY = "PromptUtilities"
-
     def format(self, prompt, **kwargs):
         print(kwargs)
         result = prompt
@@ -32,7 +62,7 @@ class PromptUtilitiesFormatString:
         return (result,)
 
 
-class PromptUtilitiesJoinStringList:
+class PromptUtilitiesJoinStringList(BaseNode):
     @classmethod
     def INPUT_TYPES(s):
         input_types = {
@@ -49,8 +79,6 @@ class PromptUtilitiesJoinStringList:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "join"
 
-    CATEGORY = "PromptUtilities"
-
     def join(self, separator, **kwargs):
         PresetManager.load_presets()
         print(kwargs)
@@ -59,7 +87,7 @@ class PromptUtilitiesJoinStringList:
         return (result,)
 
 
-class PromptUtilitiesLoadPreset:
+class PromptUtilitiesLoadPreset(BaseNode):
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -70,8 +98,6 @@ class PromptUtilitiesLoadPreset:
             
     RETURN_TYPES = ("STRING",)
     FUNCTION = "load_preset"
-
-    CATEGORY = "PromptUtilities"
 
     def load_preset(self, preset):
         prompt = PresetManager.get_prompt(preset)
