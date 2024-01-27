@@ -1,0 +1,32 @@
+{
+    "lora_simple": {
+        "positive_prompt": "hello, world",
+        "lora": {
+            "lora_name": "foo.safetensors",
+            "weight": 1.0
+        }
+    },
+    "lora_advanced": {
+        "positive_prompt": "positive, prompt",
+        "negative_prompt": "negative, prompt",
+        "lora": {
+            "lora_name": "bar.safetensors",
+            "strength_model": 0.5,
+            "strength_clip": 0.75
+        }
+    },
+    "lora_stack": {
+        "positive_prompt": "foo, bar, baz",
+        "loras": [
+            {
+                "lora_name": "foo.safetensors",
+                "weight": 1.0
+            },
+            {
+                "lora_name": "bar.safetensors",
+                "strength_model": 0.5,
+                "strength_clip": 0.75
+            }
+        ]
+    }
+}

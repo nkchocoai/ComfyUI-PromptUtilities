@@ -1,0 +1,14 @@
+{
+    "maid": {
+        "positive_prompt": "maid, maid apron, maid headdress"
+    },
+    "school uniform": {
+        "positive_prompt": "school uniform, serafuku, pleated skirt, sailor collar, neckerchief"
+    },
+    "playboy bunny": {
+        "positive_prompt": "playboy bunny, strapless leotard, rabbit ears, detached collar"
+    },
+    "bikini": {
+        "positive_prompt": "bikini, swimsuit"
+    }
+}

@@ -7,6 +7,7 @@ NODE_CLASS_MAPPINGS = {
     "PromptUtilitiesFormatString": PromptUtilitiesFormatString,
     "PromptUtilitiesJoinStringList": PromptUtilitiesJoinStringList,
     "PromptUtilitiesLoadPreset": PromptUtilitiesLoadPreset,
+    "PromptUtilitiesLoadPresetAdvanced": PromptUtilitiesLoadPresetAdvanced,
     "PromptUtilitiesConstString": PromptUtilitiesConstString,
     "PromptUtilitiesConstStringMultiLine": PromptUtilitiesConstStringMultiLine,
 }
@@ -15,8 +16,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PromptUtilitiesFormatString": "Format String",
     "PromptUtilitiesJoinStringList": "Join String List",
     "PromptUtilitiesLoadPreset": "Load Preset",
+    "PromptUtilitiesLoadPresetAdvanced": "Load Preset (Advanced)",
     "PromptUtilitiesConstString": "Const String",
-    "PromptUtilitiesConstStringMultiLine": "Const String(multi line)",
+    "PromptUtilitiesConstStringMultiLine": "Const String (multi line)",
 }
 
 WEB_DIRECTORY = "./js"
