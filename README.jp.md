@@ -24,10 +24,21 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 ![Example Format String](ex_format.png "Example Format String")  
 
 ### Load Preset
-- 選択したプリセットのプロンプトを出力します。
+- 選択したプリセットのプロンプト（文字列）を出力します。
 - プリセットは [presets](presets) ディレクトリ内に配置されたCSVファイルに記載します。
 
 ![Example Load Preset](ex_preset.png "Example Load Preset")
+
+### Load Preset (Advanced)
+- 選択したプリセットの以下の値を出力します。
+  - ポジティブプロンプト
+  - ネガティブプロンプト
+  - LoRAとその強度
+  - LoRA Stack　([Efficiency Nodes](https://github.com/jags111/efficiency-nodes-comfyui)用)
+- プリセットは [advanced_presets](advanced_presets) ディレクトリ内に配置されたJSONファイルに記載します。
+
+![Example Load Preset Advanced 01](ex_preset_adv_01.png "Example Load Preset Advanced 01")
+![Example Load Preset Advanced 02](ex_preset_adv_02.png "Example Load Preset Advanced 02")
 
 ### Const String
 - 入力した文字列を出力します。
