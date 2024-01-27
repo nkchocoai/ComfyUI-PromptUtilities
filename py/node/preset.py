@@ -68,6 +68,6 @@ class PromptUtilitiesLoadPresetAdvanced(BaseNode):
         
         for lora in loras:
             lora_name, strength_model, sterngth_clip = self.load_lora(lora)
-            loras.append((lora_name, strength_model, sterngth_clip))
+            lora_stack.append((lora_name, strength_model, sterngth_clip))
 
         return lora_stack
