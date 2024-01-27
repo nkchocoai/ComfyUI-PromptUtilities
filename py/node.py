@@ -45,9 +45,6 @@ class PromptUtilitiesFormatString(BaseNode):
                 "arg1": ("STRING",{"forceInput": True}),
             },
         }
-        # for i in range(1, MAX_NUM_ARGS + 1):
-        #     arg_name = f"arg{i}"
-        #     input_types["optional"][arg_name] = ("STRING", {"default": "", "display": arg_name})
 
         return input_types
 
