@@ -1,1 +1,7 @@
 __pycache__
+
+presets/
+!presets/sample/
+
+advanced_presets/
+!advanced_presets/sample/
