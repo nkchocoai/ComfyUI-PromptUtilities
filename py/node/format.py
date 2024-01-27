@@ -44,8 +44,5 @@ class PromptUtilitiesJoinStringList(BaseNode):
     FUNCTION = "join"
 
     def join(self, separator, **kwargs):
-        PresetManager.load_presets()
-        print(kwargs)
-        print(kwargs.values())
         result = separator.join(kwargs.values())
         return (result,)
