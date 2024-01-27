@@ -1,6 +1,7 @@
 from .base import BaseNode
 from ..preset import PresetManager, PresetManagerAdvanced
 
+import folder_paths
 
 class PromptUtilitiesLoadPreset(BaseNode):
     @classmethod
@@ -28,7 +29,7 @@ class PromptUtilitiesLoadPresetAdvanced(BaseNode):
             }
         }
             
-    RETURN_TYPES = ("STRING","STRING","STRING","FLOAT","FLOAT","LORA_STACK",)
+    RETURN_TYPES = ("STRING","STRING",folder_paths.get_filename_list("loras"),"FLOAT","FLOAT","LORA_STACK",)
     RETURN_NAMES = ("positive prompt","negative prompt","lora name","strength model","strength clip","lora stack",)
     FUNCTION = "load_preset"
 

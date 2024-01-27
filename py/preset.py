@@ -38,7 +38,7 @@ class PresetManagerBase:
         cls._presets = dict()
         preset_filename_list = cls.get_preset_filename_list()
         for preset_filename in preset_filename_list:
-            with open(os.path.join(cls.get_presets_dir(), preset_filename),"r") as f:
+            with open(os.path.join(cls.get_presets_dir(), preset_filename),"r", encoding='utf-8') as f:
                 cls.load_file(f, preset_filename)
 
 
