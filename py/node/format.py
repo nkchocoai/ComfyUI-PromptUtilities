@@ -44,5 +44,6 @@ class PromptUtilitiesJoinStringList(BaseNode):
     FUNCTION = "join"
 
     def join(self, separator, **kwargs):
-        result = separator.join(kwargs.values())
+        # join without empty strings.
+        result = separator.join([s for s in kwargs.values() if s])
         return (result,)
