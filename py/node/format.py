@@ -1,37 +1,4 @@
-import folder_paths
-
-from .preset import PresetManager
-
-class BaseNode:
-    CATEGORY = "PromptUtilities"
-
-
-class PromptUtilitiesConstStringBase(BaseNode):
-    RETURN_TYPES = ("STRING",)
-    FUNCTION = "get_string"
-
-    def get_string(self, string):
-        return (string,)
-
-
-class PromptUtilitiesConstString(PromptUtilitiesConstStringBase):
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "string": ("STRING", {"default": "", "multiline": False})
-            }
-        }
-
-
-class PromptUtilitiesConstStringMultiLine(PromptUtilitiesConstStringBase):
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "string": ("STRING", {"default": "", "multiline": True})
-            }
-        }
+from .base import BaseNode
 
 
 class PromptUtilitiesFormatString(BaseNode):
@@ -82,20 +49,3 @@ class PromptUtilitiesJoinStringList(BaseNode):
         print(kwargs.values())
         result = separator.join(kwargs.values())
         return (result,)
-
-
-class PromptUtilitiesLoadPreset(BaseNode):
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": { 
-                "preset": (list(PresetManager.get_presets().keys()), ),
-            }
-        }
-            
-    RETURN_TYPES = ("STRING",)
-    FUNCTION = "load_preset"
-
-    def load_preset(self, preset):
-        prompt = PresetManager.get_prompt(preset)
-        return (prompt,)
