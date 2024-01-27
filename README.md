@@ -12,14 +12,16 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 ```
 
 ## Nodes
-### Join String List
+### Join String List (Experimental)
 - Outputs a list of strings which are the input `argN` strings concatenated with `separator`.
+- There may be some bugs as we have not been able to check the operation very well.
 
 ![Example Join String List](ex_join.png "Example Join String List")  
 
-### Format String
+### Format String (Experimental)
 - Format String Output a string containing the input `argN` embedded in a `prompt`.
 - In the `prompt`, `[N]` is replaced by the value of `argN`.
+- There may be some bugs as we have not been able to check the operation very well.
 
 ![Example Format String](ex_format.png "Example Format String")  
 
