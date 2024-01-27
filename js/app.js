@@ -102,4 +102,12 @@ app.registerExtension({
             }
         }
     },
+
+    nodeCreated(node) {
+        if (node.comfyClass == "PromptUtilitiesFormatString" || node.comfyClass == "PromptUtilitiesJoinStringList") {
+            if (node.widgets) {
+                node.widgets = node.widgets.filter(w => !node.inputs.some((input) => w.name === input.name));
+            }
+        }
+    }
 });
