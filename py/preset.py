@@ -24,7 +24,6 @@ class PresetManagerBase:
     @classmethod
     def get_preset(cls, key):
         presets = cls.get_presets()
-        print(key, presets, presets[key])
         return presets[key]
 
     @classmethod
