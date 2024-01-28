@@ -46,3 +46,13 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 ### Const String(multi line)
 - 入力した文字列を出力します。
 - 複数行で入力できます。
+
+## おすすめの拡張機能
+- [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
+  - [Preset Text](https://github.com/pythongosssss/ComfyUI-Custom-Scripts?tab=readme-ov-file#preset-text) : 「Load Preset」ノードのようにテキストのプリセット読み込みができる。ComfyUI上でプリセットを保存できる。
+  - [Show Text](https://github.com/pythongosssss/ComfyUI-Custom-Scripts?tab=readme-ov-file#show-text) : 入力として受け取った文字列を表示する。
+  - [String Function](https://github.com/pythongosssss/ComfyUI-Custom-Scripts?tab=readme-ov-file#string-function) : 文字列の追加や置換などを行う。
+- [ComfyUI-Impact-Pack](https://github.com/ltdrdata/ComfyUI-Impact-Pack)
+  - [Wildcard](https://github.com/ltdrdata/ComfyUI-extension-tutorials/blob/Main/ComfyUI-Impact-Pack/tutorial/ImpactWildcard.md) : テキストファイルからランダムなプロンプトを選択する。
+- [UE Nodes](https://github.com/chrisgoringe/cg-use-everywhere)
+  - Anything Everywhere : 入力した値を他のノードの未接続の入力に出力する。[img/ex_preset_adv_01.png](img/ex_preset_adv_01.png) で使用。

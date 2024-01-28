@@ -48,3 +48,13 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 ### Const String(multi line)
 - Outputs the input string.
 - You can input the string in multiple lines.
+
+## Recommended extensions
+- [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
+  - [Preset Text](https://github.com/pythongosssss/ComfyUI-Custom-Scripts?tab=readme-ov-file#preset-text) : Load a preset of text like the "Load Preset" node. And save the preset on ComfyUI.
+  - [Show Text](https://github.com/pythongosssss/ComfyUI-Custom-Scripts?tab=readme-ov-file#show-text) : Displays input string.
+  - [String Function](https://github.com/pythongosssss/ComfyUI-Custom-Scripts?tab=readme-ov-file#string-function) : Append or replace strings.
+- [ComfyUI-Impact-Pack](https://github.com/ltdrdata/ComfyUI-Impact-Pack)
+  - [Wildcard](https://github.com/ltdrdata/ComfyUI-extension-tutorials/blob/Main/ComfyUI-Impact-Pack/tutorial/ImpactWildcard.md) : Choose random prompt from text files.
+- [UE Nodes](https://github.com/chrisgoringe/cg-use-everywhere)
+  - Anything Everywhere : Outputs the input value to unconnected inputs of other nodes. Used in [img/ex_preset_adv_01.png](img/ex_preset_adv_01.png).
