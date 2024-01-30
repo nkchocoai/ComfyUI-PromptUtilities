@@ -1,8 +1,21 @@
 import { app } from "/scripts/app.js";
+import { api } from "/scripts/api.js"
 
 // refer. https://github.com/ltdrdata/ComfyUI-Impact-Pack/blob/Main/js/impact-pack.js
 app.registerExtension({
     name: "Comfy.PromptUtilities.app",
+    setup() {
+        const refreshButton = document.getElementById('comfy-refresh-button');
+        refreshButton.addEventListener('click', async function () {
+            await fetch('/prompt_utilities/refresh', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({})
+            }).then(response => { }).catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    },
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
         if (nodeData.name === 'PromptUtilitiesFormatString' || nodeData.name === 'PromptUtilitiesJoinStringList') {
             let input_name = 'arg';
