@@ -42,7 +42,10 @@ class PromptUtilitiesLoadPresetAdvanced(BaseNode):
         lora_name, strength_model, sterngth_clip = self.load_lora(lora)
         
         loras = preset.get("loras", None)
-        lora_stack = self.load_loras(loras)
+        if loras is None and lora is not None:
+            lora_stack = [(lora_name, strength_model, sterngth_clip)]
+        else:
+            lora_stack = self.load_loras(loras)
             
         return (positive_prompt, negative_prompt, lora_name, strength_model, sterngth_clip, lora_stack)
     
