@@ -42,6 +42,9 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 ![Example Load Preset Advanced 01](img/ex_preset_adv_01.png "Example Load Preset Advanced 01")
 ![Example Load Preset Advanced 02](img/ex_preset_adv_02.png "Example Load Preset Advanced 02")
 
+### Random Preset / Random Preset (Advanced)
+- Outputs preset values randomly selected from within the selected file.
+
 ### Const String
 - Outputs the input string.
 

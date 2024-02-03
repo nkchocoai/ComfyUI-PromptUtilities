@@ -41,7 +41,7 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 ![Example Load Preset Advanced 02](img/ex_preset_adv_02.png "Example Load Preset Advanced 02")
 
 ### Random Preset / Random Preset (Advanced)
-- 選択したファイル内からランダムに
+- 選択したファイル内からランダムに選ばれたプリセットの値を出力します。
 
 ### Const String
 - 入力した文字列を出力します。
