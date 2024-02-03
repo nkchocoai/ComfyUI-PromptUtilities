@@ -40,6 +40,9 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 ![Example Load Preset Advanced 01](img/ex_preset_adv_01.png "Example Load Preset Advanced 01")
 ![Example Load Preset Advanced 02](img/ex_preset_adv_02.png "Example Load Preset Advanced 02")
 
+### Random Preset / Random Preset (Advanced)
+- 選択したファイル内からランダムに
+
 ### Const String
 - 入力した文字列を出力します。
 

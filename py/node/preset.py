@@ -1,3 +1,7 @@
+import json
+
+import numpy as np
+
 from .base import BaseNode
 from ..preset import PresetManager, PresetManagerAdvanced
 
@@ -34,43 +38,49 @@ class PromptUtilitiesLoadPresetAdvanced(BaseNode):
     FUNCTION = "load_preset"
 
     def load_preset(self, preset):
-        preset = PresetManagerAdvanced.get_preset(preset)
-        positive_prompt = preset.get("positive_prompt","")
-        negative_prompt = preset.get("negative_prompt","")
-        
-        lora = preset.get("lora", None)
-        lora_name, strength_model, sterngth_clip = self.load_lora(lora)
-        
-        loras = preset.get("loras", None)
-        if loras is None and lora is not None:
-            lora_stack = [(lora_name, strength_model, sterngth_clip)]
-        else:
-            lora_stack = self.load_loras(loras)
+        preset_ = PresetManagerAdvanced.get_preset(preset)
+        positive_prompt, negative_prompt, lora_name, strength_model, sterngth_clip, lora_stack = \
+            PresetManagerAdvanced.parse_preset(preset_)
             
         return (positive_prompt, negative_prompt, lora_name, strength_model, sterngth_clip, lora_stack)
-    
-    def load_lora(self, lora):
-        if lora is None:
-            return "None", 0, 0
-        
-        lora_name = lora.get("lora_name", "None")
-        if "weight" in lora:
-            strength_model = lora.get("weight", 0)
-            sterngth_clip = lora.get("weight", 0)
-        else:
-            strength_model = lora.get("strength_model", 0)
-            sterngth_clip = lora.get("strength_clip", 0)
 
-        return lora_name, strength_model, sterngth_clip
 
-    
-    def load_loras(self, loras):
-        lora_stack = []
-        if loras is None:
-            return lora_stack
-        
-        for lora in loras:
-            lora_name, strength_model, sterngth_clip = self.load_lora(lora)
-            lora_stack.append((lora_name, strength_model, sterngth_clip))
+class PromptUtilitiesRandomPreset(BaseNode):
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": { 
+                "filename": (list(PresetManager.get_preset_filename_list()), ),
+                "choice_preset": ("STRING", {"multiline": True, "dynamicPrompts": False}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff})
+            }
+        }
+            
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "random_preset"
 
-        return lora_stack
+    def random_preset(self, **kwargs):
+        choice_preset = kwargs['choice_preset']
+        return (choice_preset,)
+
+
+class PromptUtilitiesRandomPresetAdvanced(BaseNode):
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": { 
+                "filename": (list(PresetManagerAdvanced.get_preset_filename_list()), ),
+                "choice_preset": ("STRING", {"multiline": True, "dynamicPrompts": False}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff})
+            }
+        }
+            
+    RETURN_TYPES = ("STRING","STRING",folder_paths.get_filename_list("loras"),"FLOAT","FLOAT","LORA_STACK",)
+    RETURN_NAMES = ("positive prompt","negative prompt","lora name","strength model","strength clip","lora stack",)
+    FUNCTION = "random_preset"
+
+    def random_preset(self, **kwargs):
+        choice_preset = kwargs['choice_preset']
+        positive_prompt, negative_prompt, lora_name, strength_model, sterngth_clip, lora_stack = \
+            PresetManagerAdvanced.parse_preset(json.loads(choice_preset))
+        return (positive_prompt, negative_prompt, lora_name, strength_model, sterngth_clip, lora_stack)

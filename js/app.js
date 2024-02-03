@@ -1,5 +1,5 @@
 import { app } from "/scripts/app.js";
-import { api } from "/scripts/api.js"
+import { api } from "/scripts/api.js";
 
 // refer. https://github.com/ltdrdata/ComfyUI-Impact-Pack/blob/Main/js/impact-pack.js
 app.registerExtension({
@@ -124,3 +124,17 @@ app.registerExtension({
         }
     }
 });
+
+// refer. https://github.com/ltdrdata/ComfyUI-Impact-Pack/blob/Main/js/common.js
+function nodeFeedbackHandler(event) {
+    let nodes = app.graph._nodes_by_id;
+    let node = nodes[event.detail.node_id];
+    if (node) {
+        const w = node.widgets.find((w) => event.detail.widget_name === w.name);
+        if (w) {
+            w.value = event.detail.value;
+        }
+    }
+}
+
+api.addEventListener("prompt-utilities-feedback", nodeFeedbackHandler);

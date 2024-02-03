@@ -8,6 +8,8 @@ NODE_CLASS_MAPPINGS = {
     "PromptUtilitiesJoinStringList": PromptUtilitiesJoinStringList,
     "PromptUtilitiesLoadPreset": PromptUtilitiesLoadPreset,
     "PromptUtilitiesLoadPresetAdvanced": PromptUtilitiesLoadPresetAdvanced,
+    "PromptUtilitiesRandomPreset": PromptUtilitiesRandomPreset,
+    "PromptUtilitiesRandomPresetAdvanced": PromptUtilitiesRandomPresetAdvanced,
     "PromptUtilitiesConstString": PromptUtilitiesConstString,
     "PromptUtilitiesConstStringMultiLine": PromptUtilitiesConstStringMultiLine,
 }
@@ -17,6 +19,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PromptUtilitiesJoinStringList": "Join String List",
     "PromptUtilitiesLoadPreset": "Load Preset",
     "PromptUtilitiesLoadPresetAdvanced": "Load Preset (Advanced)",
+    "PromptUtilitiesRandomPreset": "Random Preset",
+    "PromptUtilitiesRandomPresetAdvanced": "Random Preset (Advanced)",
     "PromptUtilitiesConstString": "Const String",
     "PromptUtilitiesConstStringMultiLine": "Const String (multi line)",
 }
