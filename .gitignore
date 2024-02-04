@@ -5,3 +5,5 @@ presets/
 
 advanced_presets/
 !advanced_presets/sample/
+
+*.ini

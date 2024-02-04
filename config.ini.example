@@ -1,0 +1,2 @@
+[default]
+output_csv_presets_as_wildcards = ComfyUI\custom_nodes\ComfyUI-Impact-Pack\wildcards\pu_presets

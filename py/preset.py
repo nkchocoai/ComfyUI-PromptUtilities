@@ -65,7 +65,19 @@ class PresetManager(PresetManagerBase):
         presets = cls.get_presets_by_filename(filename[:-4])
         preset = random_gen.choice(presets)
         return preset
-
+    
+    @classmethod
+    def output_as_wildcard(cls, output_dir):
+        preset_filename_list = cls.get_preset_filename_list()
+        for preset_filename in preset_filename_list:
+            preset_file_path = os.path.join(cls.get_presets_dir(), preset_filename)
+            with open(preset_file_path, 'r', encoding='utf-8') as f_in:
+                reader = csv.DictReader(f_in)
+                output_file_path = os.path.join(output_dir, preset_filename[:-4] + '.txt')
+                os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
+                with open(output_file_path, 'w', encoding='utf-8') as f_out:
+                    print('write:', output_file_path)
+                    f_out.write('\n'.join([row['prompt'] for row in reader]))
 
 
 class PresetManagerAdvanced(PresetManagerBase):

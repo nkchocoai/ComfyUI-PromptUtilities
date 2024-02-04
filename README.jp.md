@@ -50,6 +50,9 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 - 入力した文字列を出力します。
 - 複数行で入力できます。
 
+## その他
+- [config.ini.example](config.ini.example) を `config.ini` に名前を変更することで、 [presets](presets) ディレクトリ内に配置されたプリセットから Wildcard 形式のテキストファイルを `output_csv_presets_as_wildcards` で指定したディレクトリに出力します。
+
 ## おすすめの拡張機能
 - [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
   - [Preset Text](https://github.com/pythongosssss/ComfyUI-Custom-Scripts?tab=readme-ov-file#preset-text) : 「Load Preset」ノードのようにテキストのプリセット読み込みができる。ComfyUI上でプリセットを保存できる。
