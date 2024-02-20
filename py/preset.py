@@ -6,6 +6,7 @@ import numpy as np
 
 import folder_paths
 
+
 class PresetManagerBase:
     _presets = None
 
@@ -15,7 +16,9 @@ class PresetManagerBase:
 
     @classmethod
     def get_presets_dir(cls):
-        return os.path.join(cls.custom_nodes_dir, "ComfyUI-PromptUtilities", cls.presets_dir)
+        return os.path.join(
+            cls.custom_nodes_dir, "ComfyUI-PromptUtilities", cls.presets_dir
+        )
 
     @classmethod
     def get_presets(cls):
@@ -31,12 +34,16 @@ class PresetManagerBase:
     @classmethod
     def get_presets_by_filename(cls, filename):
         presets = cls.get_presets()
-        presets_by_name = [v for k,v in presets.items() if k.split(' : ')[0] == filename]
+        presets_by_name = [
+            v for k, v in presets.items() if k.split(" : ")[0] == filename
+        ]
         return presets_by_name
 
     @classmethod
     def get_preset_filename_list(cls):
-        files, _ = folder_paths.recursive_search(cls.get_presets_dir(), excluded_dir_names=[".git"])
+        files, _ = folder_paths.recursive_search(
+            cls.get_presets_dir(), excluded_dir_names=[".git"]
+        )
 
         return folder_paths.filter_files_extensions(files, cls.file_extensions)
 
@@ -45,72 +52,85 @@ class PresetManagerBase:
         cls._presets = dict()
         preset_filename_list = cls.get_preset_filename_list()
         for preset_filename in preset_filename_list:
-            with open(os.path.join(cls.get_presets_dir(), preset_filename),"r", encoding='utf-8') as f:
+            with open(
+                os.path.join(cls.get_presets_dir(), preset_filename),
+                "r",
+                encoding="utf-8",
+            ) as f:
                 cls.load_file(f, preset_filename)
 
 
 class PresetManager(PresetManagerBase):
     presets_dir = "presets"
-    file_extensions = ['.csv']
+    file_extensions = [".csv"]
 
     @classmethod
     def load_file(cls, f, preset_filename):
         reader = csv.DictReader(f)
         for row in reader:
-            cls._presets[f"{preset_filename[:-4]} : {row['name']}"] = row['prompt']
-    
+            cls._presets[f"{preset_filename[:-4]} : {row['name']}"] = row["prompt"]
+
     @classmethod
     def random_preset(cls, filename, seed):
         random_gen = np.random.default_rng(seed)
         presets = cls.get_presets_by_filename(filename[:-4])
         preset = random_gen.choice(presets)
         return preset
-    
+
     @classmethod
     def output_as_wildcard(cls, output_dir):
         preset_filename_list = cls.get_preset_filename_list()
         for preset_filename in preset_filename_list:
             preset_file_path = os.path.join(cls.get_presets_dir(), preset_filename)
-            with open(preset_file_path, 'r', encoding='utf-8') as f_in:
+            with open(preset_file_path, "r", encoding="utf-8") as f_in:
                 reader = csv.DictReader(f_in)
-                output_file_path = os.path.join(output_dir, preset_filename[:-4] + '.txt')
+                output_file_path = os.path.join(
+                    output_dir, preset_filename[:-4] + ".txt"
+                )
                 os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
-                with open(output_file_path, 'w', encoding='utf-8') as f_out:
-                    print('write:', output_file_path)
-                    f_out.write('\n'.join([row['prompt'] for row in reader]))
+                with open(output_file_path, "w", encoding="utf-8") as f_out:
+                    print("write:", output_file_path)
+                    f_out.write("\n".join([row["prompt"] for row in reader]))
 
 
 class PresetManagerAdvanced(PresetManagerBase):
     presets_dir = "advanced_presets"
-    file_extensions = ['.json']
+    file_extensions = [".json"]
 
     @classmethod
     def load_file(cls, f, preset_filename):
         data = json.load(f)
-        for k,v in data.items():
+        for k, v in data.items():
             cls._presets[f"{preset_filename[:-5]} : {k}"] = v
 
     @classmethod
     def parse_preset(cls, preset):
-        positive_prompt = preset.get("positive_prompt","")
-        negative_prompt = preset.get("negative_prompt","")
-        
+        positive_prompt = preset.get("positive_prompt", "")
+        negative_prompt = preset.get("negative_prompt", "")
+
         lora = preset.get("lora", None)
         lora_name, strength_model, sterngth_clip = cls.load_lora(lora)
-        
+
         loras = preset.get("loras", None)
         if loras is None and lora is not None:
             lora_stack = [(lora_name, strength_model, sterngth_clip)]
         else:
             lora_stack = cls.load_loras(loras)
 
-        return positive_prompt, negative_prompt, lora_name, strength_model, sterngth_clip, lora_stack
-    
+        return (
+            positive_prompt,
+            negative_prompt,
+            lora_name,
+            strength_model,
+            sterngth_clip,
+            lora_stack,
+        )
+
     @classmethod
     def load_lora(cls, lora):
         if lora is None:
             return "None", 0, 0
-        
+
         lora_name = lora.get("lora_name", "None")
         if "weight" in lora:
             strength_model = lora.get("weight", 0)
@@ -126,7 +146,7 @@ class PresetManagerAdvanced(PresetManagerBase):
         lora_stack = []
         if loras is None:
             return lora_stack
-        
+
         for lora in loras:
             lora_name, strength_model, sterngth_clip = cls.load_lora(lora)
             lora_stack.append((lora_name, strength_model, sterngth_clip))
