@@ -2,6 +2,8 @@ import csv
 import json
 import os
 
+import yaml
+
 import numpy as np
 
 import folder_paths
@@ -62,13 +64,33 @@ class PresetManagerBase:
 
 class PresetManager(PresetManagerBase):
     presets_dir = "presets"
-    file_extensions = [".csv"]
+    file_extensions = [".csv", ".yml"]
 
     @classmethod
     def load_file(cls, f, preset_filename):
-        reader = csv.DictReader(f)
-        for row in reader:
-            cls._presets[f"{preset_filename[:-4]} : {row['name']}"] = row["prompt"]
+        ext = os.path.splitext(preset_filename)[1]
+        print(ext)
+        if ext == ".csv":
+            reader = csv.DictReader(f)
+            for row in reader:
+                cls._presets[f"{preset_filename[:-4]} : {row['name']}"] = row["prompt"]
+        elif ext == ".yml":
+            data = yaml.safe_load(f)
+            if isinstance(data, list):
+                for row in data:
+                    cls._presets[f"{preset_filename[:-4]} : {row.split(',')[0]}"] = row
+            elif isinstance(data, dict):
+                for k, v in data.items():
+                    if isinstance(v, dict):
+                        for k2, v2 in v.items():
+                            cls._presets[f"{preset_filename[:-4]} : {k}.{k2}"] = v2
+                    elif isinstance(v, list):
+                        for row in v:
+                            cls._presets[
+                                f"{preset_filename[:-4]} : {k}.{row.split(',')[0]}"
+                            ] = row
+                    else:
+                        cls._presets[f"{preset_filename[:-4]} : {k}"] = v
 
     @classmethod
     def random_preset(cls, filename, seed):
@@ -81,16 +103,18 @@ class PresetManager(PresetManagerBase):
     def output_as_wildcard(cls, output_dir):
         preset_filename_list = cls.get_preset_filename_list()
         for preset_filename in preset_filename_list:
-            preset_file_path = os.path.join(cls.get_presets_dir(), preset_filename)
-            with open(preset_file_path, "r", encoding="utf-8") as f_in:
-                reader = csv.DictReader(f_in)
-                output_file_path = os.path.join(
-                    output_dir, preset_filename[:-4] + ".txt"
-                )
-                os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
-                with open(output_file_path, "w", encoding="utf-8") as f_out:
-                    print("write:", output_file_path)
-                    f_out.write("\n".join([row["prompt"] for row in reader]))
+            ext = os.path.splitext(preset_filename)[1]
+            if ext == ".csv":
+                preset_file_path = os.path.join(cls.get_presets_dir(), preset_filename)
+                with open(preset_file_path, "r", encoding="utf-8") as f_in:
+                    reader = csv.DictReader(f_in)
+                    output_file_path = os.path.join(
+                        output_dir, preset_filename[:-4] + ".txt"
+                    )
+                    os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
+                    with open(output_file_path, "w", encoding="utf-8") as f_out:
+                        print("write:", output_file_path)
+                        f_out.write("\n".join([row["prompt"] for row in reader]))
 
 
 class PresetManagerAdvanced(PresetManagerBase):
