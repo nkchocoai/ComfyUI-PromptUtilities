@@ -9,7 +9,7 @@ class PromptUtilitiesFormatString(BaseNode):
                 "prompt": ("STRING", {"default": "[1], [2]", "display": "prompt"}),
             },
             "optional": {
-                "arg1": ("STRING",{"forceInput": True}),
+                "arg1": ("STRING", {"forceInput": True}),
             },
         }
 
@@ -19,10 +19,9 @@ class PromptUtilitiesFormatString(BaseNode):
     FUNCTION = "format"
 
     def format(self, prompt, **kwargs):
-        print(kwargs)
         result = prompt
         for i in range(1, len(kwargs) + 1):
-            result = result.replace(f'[{i}]',kwargs[f"arg{i}"]) 
+            result = result.replace(f"[{i}]", kwargs[f"arg{i}"])
         return (result,)
 
 
@@ -34,7 +33,7 @@ class PromptUtilitiesJoinStringList(BaseNode):
                 "separator": ("STRING", {"default": ", ", "display": "separator"}),
             },
             "optional": {
-                "arg1": ("STRING",{"forceInput": True}),
+                "arg1": ("STRING", {"forceInput": True}),
             },
         }
 
