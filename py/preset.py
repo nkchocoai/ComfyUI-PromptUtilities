@@ -69,7 +69,6 @@ class PresetManager(PresetManagerBase):
     @classmethod
     def load_file(cls, f, preset_filename):
         ext = os.path.splitext(preset_filename)[1]
-        print(ext)
         if ext == ".csv":
             reader = csv.DictReader(f)
             for row in reader:
@@ -115,6 +114,29 @@ class PresetManager(PresetManagerBase):
                     with open(output_file_path, "w", encoding="utf-8") as f_out:
                         print("write:", output_file_path)
                         f_out.write("\n".join([row["prompt"] for row in reader]))
+            elif ext == ".yml":
+                preset_file_path = os.path.join(cls.get_presets_dir(), preset_filename)
+                with open(preset_file_path, "r", encoding="utf-8") as f_in:
+                    data = yaml.safe_load(f_in)
+                    output_file_path = os.path.join(
+                        output_dir, preset_filename[:-4] + ".txt"
+                    )
+                    with open(output_file_path, "w", encoding="utf-8") as f_out:
+                        if isinstance(data, list):
+                            items = data
+                        elif isinstance(data, dict):
+                            items = []
+                            for v in data.values():
+                                if isinstance(v, dict):
+                                    for v2 in v.values():
+                                        items.append(v2)
+                                elif isinstance(v, list):
+                                    for row in v:
+                                        items.append(row)
+                                else:
+                                    items.append(v)
+                        print("write:", output_file_path)
+                        f_out.write("\n".join([item for item in items]))
 
 
 class PresetManagerAdvanced(PresetManagerBase):
