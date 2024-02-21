@@ -28,6 +28,7 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 ### Load Preset
 - Outputs the prompt for the selected preset.
 - The presets are listed in a CSV file located in the [presets](presets) directory.
+- [Easy Prompt Selector](https://github.com/blue-pen5805/sdweb-easy-prompt-selector?tab=readme-ov-file#customization) yml file is also partially supported.
 
 ![Example Load Preset](img/ex_preset.png "Example Load Preset")
 
