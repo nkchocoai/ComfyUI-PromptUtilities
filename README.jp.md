@@ -26,6 +26,7 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 ### Load Preset
 - 選択したプリセットのプロンプト（文字列）を出力します。
 - プリセットは [presets](presets) ディレクトリ内に配置されたCSVファイルに記載します。
+- [Easy Prompt Selector](https://github.com/blue-pen5805/sdweb-easy-prompt-selector?tab=readme-ov-file#customization) のymlファイルにも一部対応しています。
 
 ![Example Load Preset](img/ex_preset.png "Example Load Preset")
 
