@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-promptutilities"
+description = "Nodes: Format String, Join String List, Load Preset, Load Preset (Advanced), Const String, Const String (multi line). Add useful nodes related to prompt."
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/nkchocoai/ComfyUI-PromptUtilities"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-PromptUtilities"
+Icon = ""
