@@ -44,6 +44,9 @@ class PromptUtilitiesPromptWeight(BaseNode):
 
     def gen_prompt_weight(self, **kwargs):
         prompts = []
+
+        if kwargs.get("prompt_weight", ""):
+            prompts.append(kwargs["prompt_weight"])
         for i in range(4):
             prompt = kwargs[f"prompt{i+1}"]
             weight = kwargs[f"weight{i+1}"]
@@ -54,8 +57,6 @@ class PromptUtilitiesPromptWeight(BaseNode):
             else:
                 prompts.append(f"({prompt}:{weight})")
 
-        if kwargs.get("prompt_weight", ""):
-            prompts.append(kwargs["prompt_weight"])
         return (", ".join(prompts),)
 
 
