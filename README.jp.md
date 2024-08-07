@@ -52,6 +52,17 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 - 入力した文字列を出力します。
 - 複数行で入力できます。
 
+### Prompt Weight
+- 各 `prompt` に重みを付与した文字列を出力します。
+![Example Prompt Weight](img/ex_prompt_weight.png "Example Prompt Weight")
+
+### Round Prompt Weight
+- `prompt` の重みを丸めます。
+
+### Replace or Insert Tag
+- `pattern` にマッチしたタグに対して、`value`を置換(`mode`=replace) or 後ろに追加(`mode`=insert)する。
+![Example Replace or Insert Tag](img/ex_replace_or_insert_tag.png "Example Replace or Insert Tag")
+
 ## その他
 - [config.ini.example](config.ini.example) を `config.ini` に名前を変更することで、 [presets](presets) ディレクトリ内に配置されたプリセットから Wildcard 形式のテキストファイルを `output_csv_presets_as_wildcards` で指定したディレクトリに出力します。
 

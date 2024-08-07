@@ -54,6 +54,17 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 - Outputs the input string.
 - You can input the string in multiple lines.
 
+### Prompt Weight
+- Outputs a weighted string for each `prompt`.
+![Example Prompt Weight](img/ex_prompt_weight.png "Example Prompt Weight")
+
+### Round Prompt Weight
+- Round `prompt` weights.
+
+### Replace or Insert Tag
+- Replace (`mode`=replace) or append (`mode`=insert) the `value` to the tag matching the `pattern`.
+![Example Replace or Insert Tag](img/ex_replace_or_insert_tag.png "Example Replace or Insert Tag")
+
 ## Misc
 - Renaming [config.ini.example](config.ini.example) to `config.ini` will output Wildcard format text files from the presets placed in the [presets](presets) directory to the directory specified by `output_csv_presets_as_wildcards`.
 
