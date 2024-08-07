@@ -5,6 +5,7 @@ from .py.node.const import *
 from .py.node.format import *
 from .py.node.preset import *
 from .py.node.weight import *
+from .py.node.replace import *
 from .py.server import *
 from .py.preset import PresetManager
 
@@ -19,6 +20,7 @@ NODE_CLASS_MAPPINGS = {
     "PromptUtilitiesConstStringMultiLine": PromptUtilitiesConstStringMultiLine,
     "PromptUtilitiesPromptWeight": PromptUtilitiesPromptWeight,
     "PromptUtilitiesRoundPromptWeight": PromptUtilitiesRoundPromptWeight,
+    "PromptUtilitiesReplaceOrInsertTag": PromptUtilitiesReplaceOrInsertTag,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -32,6 +34,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PromptUtilitiesConstStringMultiLine": "Const String (multi line)",
     "PromptUtilitiesPromptWeight": "Prompt Weight",
     "PromptUtilitiesRoundPromptWeight": "Round Prompt Weight",
+    "PromptUtilitiesReplaceOrInsertTag": "Replace or Insert Tag",
 }
 
 WEB_DIRECTORY = "./js"
