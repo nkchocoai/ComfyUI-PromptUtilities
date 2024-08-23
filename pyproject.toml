@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-promptutilities"
 description = "Nodes: Format String, Join String List, Load Preset, Load Preset (Advanced), Const String, Const String (multi line). Add useful nodes related to prompt."
-version = "1.0.2"
+version = "1.0.3"
 license = { file = "LICENSE" }
 
 [project.urls]
