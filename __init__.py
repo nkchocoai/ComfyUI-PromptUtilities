@@ -6,6 +6,7 @@ from .py.node.format import *
 from .py.node.preset import *
 from .py.node.weight import *
 from .py.node.replace import *
+from .py.node.random import *
 from .py.server import *
 from .py.preset import PresetManager
 
@@ -21,6 +22,8 @@ NODE_CLASS_MAPPINGS = {
     "PromptUtilitiesPromptWeight": PromptUtilitiesPromptWeight,
     "PromptUtilitiesRoundPromptWeight": PromptUtilitiesRoundPromptWeight,
     "PromptUtilitiesReplaceOrInsertTag": PromptUtilitiesReplaceOrInsertTag,
+    "PromptUtilitiesSampleTags": PromptUtilitiesSampleTags,
+    "PromptUtilitiesSampleTagsWithWeight": PromptUtilitiesSampleTagsWithWeight,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -35,6 +38,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PromptUtilitiesPromptWeight": "Prompt Weight",
     "PromptUtilitiesRoundPromptWeight": "Round Prompt Weight",
     "PromptUtilitiesReplaceOrInsertTag": "Replace or Insert Tag",
+    "PromptUtilitiesSampleTags": "Sample Tags",
+    "PromptUtilitiesSampleTagsWithWeight": "Sample Tags With Weight",
 }
 
 WEB_DIRECTORY = "./js"
