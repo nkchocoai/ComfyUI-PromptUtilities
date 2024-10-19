@@ -63,7 +63,15 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 
 ### Replace or Insert Tag
 - Replace (`mode`=replace) or append (`mode`=insert) the `value` to the tag matching the `pattern`.
-![Example Replace or Insert Tag](img/ex_replace_or_insert_tag.png "Example Replace or Insert Tag")
+![Example Sample Tags](img/ex_sample_tags.png "Example Sample Tags")
+
+### Sample Tags
+- Sample `min_k` ~ `max_k` random values (no duplicates) from a list of `tags` delimited by `tags_delimiter`.
+! [Example Sample Tags](img/ex_sample_tags.png “Example Sample Tags”)
+
+### Sample Tags With Weight
+- Sample `min_k` ~ `max_k` random values (no duplicates) from a list of `tags` delimited by `tags_delimiter`.
+- Each tag sampled is given a random weight of `min_w` ~ `max_w` (step:`step_w`).
 
 ## Misc
 - Renaming [config.ini.example](config.ini.example) to `config.ini` will output Wildcard format text files from the presets placed in the [presets](presets) directory to the directory specified by `output_csv_presets_as_wildcards`.

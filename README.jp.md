@@ -63,6 +63,14 @@ git clone https://github.com/nkchocoai/ComfyUI-PromptUtilities.git
 - `pattern` にマッチしたタグに対して、`value`を置換(`mode`=replace) or 後ろに追加(`mode`=insert)する。
 ![Example Replace or Insert Tag](img/ex_replace_or_insert_tag.png "Example Replace or Insert Tag")
 
+### Sample Tags
+- `tags` を `tags_delimiter` で分割したリストの中から、ランダムな値を `min_k` ~ `max_k` 個取り出します（重複無し）。
+![Example Sample Tags](img/ex_sample_tags.png "Example Sample Tags")
+
+### Sample Tags With Weight
+- `tags` を `tags_delimiter` で分割したリストの中から、ランダムな値を `min_k` ~ `max_k` 個取り出します（重複無し）。
+- 取り出した各タグには `min_w` ~ `max_w` (間隔:`step_w`) のランダムな重みが付与されます。
+
 ## その他
 - [config.ini.example](config.ini.example) を `config.ini` に名前を変更することで、 [presets](presets) ディレクトリ内に配置されたプリセットから Wildcard 形式のテキストファイルを `output_csv_presets_as_wildcards` で指定したディレクトリに出力します。
 
