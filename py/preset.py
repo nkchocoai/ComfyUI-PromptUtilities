@@ -64,16 +64,18 @@ class PresetManagerBase:
 
 class PresetManager(PresetManagerBase):
     presets_dir = "presets"
-    file_extensions = [".csv", ".yml"]
+    csv_exts = [".csv"]
+    yml_exts = [".yml", ".yaml"]
+    file_extensions = [*csv_exts, *yml_exts]
 
     @classmethod
     def load_file(cls, f, preset_filename):
         ext = os.path.splitext(preset_filename)[1]
-        if ext == ".csv":
+        if ext in cls.csv_exts:
             reader = csv.DictReader(f)
             for row in reader:
                 cls._presets[f"{preset_filename[:-4]} : {row['name']}"] = row["prompt"]
-        elif ext == ".yml":
+        elif ext in cls.yml_exts:
             data = yaml.safe_load(f)
             if isinstance(data, list):
                 for row in data:
@@ -103,7 +105,7 @@ class PresetManager(PresetManagerBase):
         preset_filename_list = cls.get_preset_filename_list()
         for preset_filename in preset_filename_list:
             ext = os.path.splitext(preset_filename)[1]
-            if ext == ".csv":
+            if ext in cls.csv_exts:
                 preset_file_path = os.path.join(cls.get_presets_dir(), preset_filename)
                 with open(preset_file_path, "r", encoding="utf-8") as f_in:
                     reader = csv.DictReader(f_in)
@@ -114,7 +116,7 @@ class PresetManager(PresetManagerBase):
                     with open(output_file_path, "w", encoding="utf-8") as f_out:
                         print("write:", output_file_path)
                         f_out.write("\n".join([row["prompt"] for row in reader]))
-            elif ext == ".yml":
+            elif ext in cls.yml_exts:
                 preset_file_path = os.path.join(cls.get_presets_dir(), preset_filename)
                 with open(preset_file_path, "r", encoding="utf-8") as f_in:
                     data = yaml.safe_load(f_in)
