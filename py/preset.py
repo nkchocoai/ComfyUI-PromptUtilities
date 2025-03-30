@@ -1,12 +1,11 @@
 import csv
 import json
 import os
-
-import yaml
-
-import numpy as np
+from pathlib import Path
 
 import folder_paths
+import numpy as np
+import yaml
 
 
 class PresetManagerBase:
@@ -64,37 +63,39 @@ class PresetManagerBase:
 
 class PresetManager(PresetManagerBase):
     presets_dir = "presets"
-    file_extensions = [".csv", ".yml"]
+    csv_exts = [".csv"]
+    yml_exts = [".yml", ".yaml"]
+    file_extensions = [*csv_exts, *yml_exts]
 
     @classmethod
     def load_file(cls, f, preset_filename):
-        ext = os.path.splitext(preset_filename)[1]
-        if ext == ".csv":
+        preset_file = Path(preset_filename)
+        if preset_file.suffix in cls.csv_exts:
             reader = csv.DictReader(f)
             for row in reader:
-                cls._presets[f"{preset_filename[:-4]} : {row['name']}"] = row["prompt"]
-        elif ext == ".yml":
+                cls._presets[f"{preset_file.stem} : {row['name']}"] = row["prompt"]
+        elif preset_file.suffix in cls.yml_exts:
             data = yaml.safe_load(f)
             if isinstance(data, list):
                 for row in data:
-                    cls._presets[f"{preset_filename[:-4]} : {row.split(',')[0]}"] = row
+                    cls._presets[f"{preset_file.stem} : {row.split(',')[0]}"] = row
             elif isinstance(data, dict):
                 for k, v in data.items():
                     if isinstance(v, dict):
                         for k2, v2 in v.items():
-                            cls._presets[f"{preset_filename[:-4]} : {k}.{k2}"] = v2
+                            cls._presets[f"{preset_file.stem} : {k}.{k2}"] = v2
                     elif isinstance(v, list):
                         for row in v:
                             cls._presets[
-                                f"{preset_filename[:-4]} : {k}.{row.split(',')[0]}"
+                                f"{preset_file.stem} : {k}.{row.split(',')[0]}"
                             ] = row
                     else:
-                        cls._presets[f"{preset_filename[:-4]} : {k}"] = v
+                        cls._presets[f"{preset_file.stem} : {k}"] = v
 
     @classmethod
     def random_preset(cls, filename, seed):
         random_gen = np.random.default_rng(seed)
-        presets = cls.get_presets_by_filename(filename[:-4])
+        presets = cls.get_presets_by_filename(Path(filename).stem)
         preset = random_gen.choice(presets)
         return preset
 
@@ -102,24 +103,24 @@ class PresetManager(PresetManagerBase):
     def output_as_wildcard(cls, output_dir):
         preset_filename_list = cls.get_preset_filename_list()
         for preset_filename in preset_filename_list:
-            ext = os.path.splitext(preset_filename)[1]
-            if ext == ".csv":
+            preset_file = Path(preset_filename)
+            if preset_file.suffix in cls.csv_exts:
                 preset_file_path = os.path.join(cls.get_presets_dir(), preset_filename)
                 with open(preset_file_path, "r", encoding="utf-8") as f_in:
                     reader = csv.DictReader(f_in)
                     output_file_path = os.path.join(
-                        output_dir, preset_filename[:-4] + ".txt"
+                        output_dir, preset_file.stem + ".txt"
                     )
                     os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
                     with open(output_file_path, "w", encoding="utf-8") as f_out:
                         print("write:", output_file_path)
                         f_out.write("\n".join([row["prompt"] for row in reader]))
-            elif ext == ".yml":
+            elif preset_file.suffix in cls.yml_exts:
                 preset_file_path = os.path.join(cls.get_presets_dir(), preset_filename)
                 with open(preset_file_path, "r", encoding="utf-8") as f_in:
                     data = yaml.safe_load(f_in)
                     output_file_path = os.path.join(
-                        output_dir, preset_filename[:-4] + ".txt"
+                        output_dir, preset_file.stem + ".txt"
                     )
                     with open(output_file_path, "w", encoding="utf-8") as f_out:
                         if isinstance(data, list):
@@ -147,7 +148,7 @@ class PresetManagerAdvanced(PresetManagerBase):
     def load_file(cls, f, preset_filename):
         data = json.load(f)
         for k, v in data.items():
-            cls._presets[f"{preset_filename[:-5]} : {k}"] = v
+            cls._presets[f"{Path(preset_filename).stem} : {k}"] = v
 
     @classmethod
     def parse_preset(cls, preset):
@@ -202,6 +203,6 @@ class PresetManagerAdvanced(PresetManagerBase):
     @classmethod
     def random_preset(cls, filename, seed):
         random_gen = np.random.default_rng(seed)
-        presets = cls.get_presets_by_filename(filename[:-5])
+        presets = cls.get_presets_by_filename(Path(filename).stem)
         preset = random_gen.choice(presets)
         return preset
